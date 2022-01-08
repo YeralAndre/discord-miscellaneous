@@ -1,6 +1,6 @@
-import { Schema, model } from "mongoose";
+import { Schema, model } from 'mongoose';
 
-let LevelSystemSchema: Schema = new Schema({
+const LevelSystemSchema: Schema = new Schema({
   guildID: {
     type: String,
   },
@@ -15,4 +15,4 @@ let LevelSystemSchema: Schema = new Schema({
   },
 });
 
-export default model("levelSystemSchema", LevelSystemSchema);
+export default model('levelSystemSchema', LevelSystemSchema);

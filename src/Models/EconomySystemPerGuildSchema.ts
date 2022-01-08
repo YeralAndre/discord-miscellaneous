@@ -1,6 +1,6 @@
-import { Schema, model } from "mongoose";
+import { Schema, model } from 'mongoose';
 
-let BankSchema: Schema = new Schema({
+const BankSchema: Schema = new Schema({
   guildID: {
     type: String,
   },
@@ -24,4 +24,4 @@ let BankSchema: Schema = new Schema({
   dailyRest: Number,
 });
 
-export default model("EconomyBankSchema", BankSchema);
+export default model('EconomyBankSchemaGuild', BankSchema);

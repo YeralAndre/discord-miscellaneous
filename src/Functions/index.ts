@@ -1,1 +1,1 @@
-export { paginationSystem } from "./Miscellaneous/paginationSystem";
+export { paginationSystem } from './Miscellaneous/paginationSystem';

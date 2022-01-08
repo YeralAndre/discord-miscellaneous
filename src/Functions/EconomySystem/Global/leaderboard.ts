@@ -1,12 +1,12 @@
-import { FetchedUser } from "../../../Interfaces/EconomySystem/FetchedUser";
-import EconomySystemSchema from "../../../Models/EconomySystemGlobal";
-import { DsMiError } from "../../../Utils/DsMiError";
+import { FetchedUser } from '../../../Interfaces/EconomySystem/FetchedUser';
+import EconomySystemSchema from '../../../Models/EconomySystemGlobal';
+import { DsMiError } from '../../../Utils/DsMiError';
 
 export async function leaderboard() {
-  let has = await EconomySystemSchema.find();
-  if (!has) throw new DsMiError("No data available!");
-  let sortedData = await EconomySystemSchema.find()
-    .sort([["balMoney", "descending"]])
+  const has = await EconomySystemSchema.find();
+  if (!has) throw new DsMiError('No data available!');
+  const sortedData = await EconomySystemSchema.find()
+    .sort([['balMoney', 'descending']])
     .exec();
   return sortedData.map((x, i) => {
     return {

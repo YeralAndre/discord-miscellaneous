@@ -1,16 +1,16 @@
-import { connect, connection } from "mongoose";
-import { addBankCapacity } from "../Functions/EconomySystem/Guild/addBankCapacity";
-import { addMoney } from "../Functions/EconomySystem/Guild/addMoney";
-import { createUser } from "../Functions/EconomySystem/Guild/createUser";
-import { daily } from "../Functions/EconomySystem/Guild/daily";
-import { delUser } from "../Functions/EconomySystem/Guild/delUser";
-import { deposit } from "../Functions/EconomySystem/Guild/deposit";
-import { guildLeaderboard } from "../Functions/EconomySystem/Guild/guildLeaderboard";
-import { subsMoney } from "../Functions/EconomySystem/Guild/subsMoney";
-import { userBal } from "../Functions/EconomySystem/Guild/userBal";
-import { withdraw } from "../Functions/EconomySystem/Guild/withdraw";
-import { MongoURI } from "../Types";
-import { DsMiError } from "../Utils/DsMiError";
+import { connect, connection } from 'mongoose';
+import { addBankCapacity } from '../Functions/EconomySystem/Guild/addBankCapacity';
+import { addMoney } from '../Functions/EconomySystem/Guild/addMoney';
+import { createUser } from '../Functions/EconomySystem/Guild/createUser';
+import { daily } from '../Functions/EconomySystem/Guild/daily';
+import { delUser } from '../Functions/EconomySystem/Guild/delUser';
+import { deposit } from '../Functions/EconomySystem/Guild/deposit';
+import { guildLeaderboard } from '../Functions/EconomySystem/Guild/guildLeaderboard';
+import { subsMoney } from '../Functions/EconomySystem/Guild/subsMoney';
+import { userBal } from '../Functions/EconomySystem/Guild/userBal';
+import { withdraw } from '../Functions/EconomySystem/Guild/withdraw';
+import { MongoURI } from '../Types';
+import { DsMiError } from '../Utils/DsMiError';
 
 /**
  * Setup EconomySystem per guild.
@@ -19,11 +19,9 @@ import { DsMiError } from "../Utils/DsMiError";
 export default class EconomySystemPerGuild {
   constructor(mongoURL: MongoURI) {
     if (connection?.db) return;
-    connect(mongoURL)
-      .then(() => {})
-      .catch((e) => {
-        throw new DsMiError(`Error on connect to Mongoose: \n${e}`);
-      });
+    connect(mongoURL).catch((e) => {
+      throw new DsMiError(`Error on connect to Mongoose: \n${e}`);
+    });
   }
   /**
    * Add bank capacity for specific user.

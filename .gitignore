@@ -1,1 +1,7 @@
 node_modules
+/lib
+tslint.json
+.prettierrc
+.npmignore
+jestconfig.json
+tsconfig.json

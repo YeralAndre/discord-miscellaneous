@@ -1,25 +1,26 @@
-import LevelSystemSchema from "../../Models/LevelSystemSchema";
-import { LevelSystem } from "../../Interfaces";
-import { DsMiError } from "../../Utils/DsMiError";
+import LevelSystemSchema from '../../Models/LevelSystemSchema';
+import { LevelSystem } from '../../Interfaces';
+import { DsMiError } from '../../Utils/DsMiError';
 
 export async function setLvl(guildID: string, userID: string, lvl: number) {
-  let hasUser: LevelSystem = await LevelSystemSchema.findOne({
+  const hasUser: LevelSystem = await LevelSystemSchema.findOne({
     guildID: guildID,
     userID: userID,
   });
   if (!hasUser) {
-    throw new DsMiError(
-      "This user not exist! Create with createUser function!"
-    );
+    throw new DsMiError('This user not exist! Create with createUser function!');
   } else {
-    await LevelSystemSchema.findOneAndUpdate(
+    const updatedUser = await LevelSystemSchema.findOneAndUpdate(
       {
         guildID: guildID,
         userID: userID,
       },
       {
         lvl: lvl,
-      }
+      },
     );
+    delete updatedUser['_id'];
+    delete updatedUser['__v'];
+    return updatedUser as LevelSystem;
   }
 }

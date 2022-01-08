@@ -1,9 +1,9 @@
-import { AvatarURL, BackgroundURL, ColorResolvable } from "../Types";
-import Canvas, { registerFont } from "canvas";
-import path from "path";
-import { DsMiError } from "../Utils/DsMiError";
-registerFont(path.join(__dirname, "..", "/Fonts/Whitney_Bold.ttf"), {
-  family: "Arial",
+import { AvatarURL, BackgroundURL, ColorResolvable } from '../Types';
+import Canvas, { registerFont } from 'canvas';
+import path from 'path';
+import { DsMiError } from '../Utils/DsMiError';
+registerFont(path.join(__dirname, '..', '/Fonts/Whitney_Bold.ttf'), {
+  family: 'Arial',
 });
 
 export default class WelcomeCard {
@@ -21,12 +21,8 @@ export default class WelcomeCard {
     return this;
   }
   public setBackground(url: BackgroundURL) {
-    if (
-      !/https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,4}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/.test(
-        url
-      )
-    )
-      throw new DsMiError("This background url is invalid!");
+    if (!/https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,4}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/.test(url))
+      throw new DsMiError('This background url is invalid!');
     this.options.background = url;
     return this;
   }
@@ -51,36 +47,34 @@ export default class WelcomeCard {
     return this;
   }
   public async build() {
-    let canvas = Canvas.createCanvas(1024, 500);
-    let ctx = canvas.getContext("2d");
-    ctx.font = "90px Arial";
-    ctx.fillStyle = this.options.textColor || "FFFFFF";
-    let background = await Canvas.loadImage(
-      this.options.background || "https://i.imgur.com/I2KLYi8.png"
-    );
+    const canvas = Canvas.createCanvas(1024, 500);
+    const ctx = canvas.getContext('2d');
+    ctx.font = '90px Arial';
+    ctx.fillStyle = this.options.textColor || 'FFFFFF';
+    const background = await Canvas.loadImage(this.options.background || 'https://i.imgur.com/I2KLYi8.png');
     ctx.drawImage(background, 0, 0, 1024, 500);
     ctx.save();
-    ctx.shadowColor = "#000000";
+    ctx.shadowColor = '#000000';
     ctx.shadowBlur = 5;
     ctx.shadowOffsetX = 5;
     ctx.shadowOffsetY = 5;
-    ctx.textAlign = "center";
+    ctx.textAlign = 'center';
     ctx.fillText(this.options.title, 522, 375);
     ctx.beginPath();
-    ctx.font = "72px Arial";
-    ctx.textAlign = "center";
-    ctx.textBaseline = "hanging";
+    ctx.font = '72px Arial';
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'hanging';
     ctx.lineWidth = 5;
     ctx.closePath();
     ctx.beginPath();
     ctx.arc(512, 166, 128, 0, Math.PI * 2, true);
     ctx.stroke();
     ctx.fill();
-    ctx.font = "55px Arial";
-    ctx.textAlign = "center";
+    ctx.font = '55px Arial';
+    ctx.textAlign = 'center';
     ctx.fillText(this.options.subtitle, 522, 375);
-    ctx.font = "45px Arial";
-    ctx.shadowColor = "#000000";
+    ctx.font = '45px Arial';
+    ctx.shadowColor = '#000000';
     ctx.shadowBlur = 5;
     ctx.shadowOffsetX = 5;
     ctx.shadowOffsetY = 5;
@@ -90,7 +84,7 @@ export default class WelcomeCard {
     ctx.arc(512, 166, 119, 0, Math.PI * 2, true);
     ctx.closePath();
     ctx.clip();
-    let avatar = await Canvas.loadImage(this.options.avatar);
+    const avatar = await Canvas.loadImage(this.options.avatar);
     ctx.drawImage(avatar, 393, 47, 238, 238);
     return canvas.toBuffer();
   }

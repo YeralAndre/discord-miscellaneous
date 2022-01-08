@@ -1,10 +1,10 @@
-import { AvatarURL, BackgroundURL, ColorResolvable } from "../Types";
-import Canvas, { registerFont } from "canvas";
-import { fillTextWithTwemoji } from "node-canvas-with-twemoji-and-discord-emoji";
-import path from "path";
-import { DsMiError } from "../Utils/DsMiError";
-registerFont(path.join(__dirname, "..", "/Fonts/Whitney_Bold.ttf"), {
-  family: "Arial",
+import { AvatarURL, BackgroundURL, ColorResolvable } from '../Types';
+import Canvas, { registerFont } from 'canvas';
+import { fillTextWithTwemoji } from 'node-canvas-with-twemoji-and-discord-emoji';
+import path from 'path';
+import { DsMiError } from '../Utils/DsMiError';
+registerFont(path.join(__dirname, '..', '/Fonts/Whitney_Bold.ttf'), {
+  family: 'Arial',
 });
 
 export default class LvLUpCard {
@@ -22,12 +22,8 @@ export default class LvLUpCard {
     return this;
   }
   public setBackground(url: BackgroundURL) {
-    if (
-      !/https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,4}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/.test(
-        url
-      )
-    )
-      throw new DsMiError("This background url is invalid!");
+    if (!/https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,4}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/.test(url))
+      throw new DsMiError('This background url is invalid!');
     this.options.background = url;
     return this;
   }
@@ -52,28 +48,28 @@ export default class LvLUpCard {
     return this;
   }
   public async build() {
-    const applyText = (canvas: Canvas.Canvas, text: string) => {
-      const ctx = canvas.getContext("2d");
+    const applyText = (canvasA: Canvas.Canvas, text: string) => {
+      const ctxA = canvasA.getContext('2d');
       let fontSize = 50;
       do {
-        ctx.font = `${(fontSize -= 10)}px Arial`;
-      } while (ctx.measureText(text).width > canvas.width - 300);
-      return ctx.font;
+        ctxA.font = `${(fontSize -= 10)}px Arial`;
+      } while (ctxA.measureText(text).width > canvasA.width - 300);
+      return ctxA.font;
     };
     const canvas = Canvas.createCanvas(700, 300);
-    const ctx = canvas.getContext("2d");
+    const ctx = canvas.getContext('2d');
     const background = await Canvas.loadImage(this.options.background);
-    ctx.fillStyle = this.options.textColor || "#FFFFFF";
+    ctx.fillStyle = this.options.textColor || '#FFFFFF';
     ctx.drawImage(background, 0, 0, canvas.width, canvas.height);
-    ctx.strokeStyle = "#74037b";
+    ctx.strokeStyle = '#74037b';
     ctx.strokeRect(0, 0, canvas.width, canvas.height);
-    ctx.textAlign = "center";
+    ctx.textAlign = 'center';
     ctx.save();
     ctx.shadowBlur = 5;
     ctx.shadowOffsetX = 5;
     ctx.shadowOffsetY = 5;
-    ctx.shadowColor = "#000000";
-    ctx.fillStyle = this.options.textColor || "#FFFFFF";
+    ctx.shadowColor = '#000000';
+    ctx.fillStyle = this.options.textColor || '#FFFFFF';
     ctx.arc(125, 140, 109, 0, Math.PI * 2, true);
     ctx.stroke();
     ctx.fill();
@@ -82,7 +78,7 @@ export default class LvLUpCard {
     ctx.fillText(this.options.subtitle, 450, 175);
     ctx.fillText(this.options.footer, 450, 225);
     ctx.restore();
-    ctx.fillStyle = "#000000";
+    ctx.fillStyle = '#000000';
     ctx.beginPath();
     ctx.arc(125, 140, 100, 0, Math.PI * 2, true);
     ctx.closePath();

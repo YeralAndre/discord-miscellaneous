@@ -1,12 +1,12 @@
-import { FetchedUser } from "../../../Interfaces/EconomySystem/FetchedUser";
-import EconomySystemSchema from "../../../Models/EconomySystemPerGuildSchema";
-import { DsMiError } from "../../../Utils/DsMiError";
+import { FetchedUser } from '../../../Interfaces/EconomySystem/FetchedUser';
+import EconomySystemSchema from '../../../Models/EconomySystemPerGuildSchema';
+import { DsMiError } from '../../../Utils/DsMiError';
 
 export async function guildLeaderboard(guildID: string) {
-  let hasGuild = await EconomySystemSchema.find({ guildID: guildID });
-  if (!hasGuild) throw new DsMiError("This guild not exists!");
-  let sortedData = await EconomySystemSchema.find({ guildID: guildID })
-    .sort([["balMoney", "descending"]])
+  const hasGuild = await EconomySystemSchema.find({ guildID: guildID });
+  if (!hasGuild) throw new DsMiError('This guild not exists!');
+  const sortedData = await EconomySystemSchema.find({ guildID: guildID })
+    .sort([['balMoney', 'descending']])
     .exec();
   return sortedData.map((x) => {
     return {

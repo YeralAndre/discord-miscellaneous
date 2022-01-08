@@ -1,21 +1,21 @@
-import { addXp } from "../Functions/LevelSystem/addXp";
-import { addLvL } from "../Functions/LevelSystem/addLvL";
-import { connect } from "mongoose";
-import { DsMiError } from "../Utils/DsMiError";
-import { createUser } from "../Functions/LevelSystem/createUser";
-import { delGuild } from "../Functions/LevelSystem/delGuild";
-import { delUser } from "../Functions/LevelSystem/delUser";
-import { existsUser } from "../Functions/LevelSystem/existsUser";
-import { fetchAll } from "../Functions/LevelSystem/fetchAll";
-import { fetchGuild } from "../Functions/LevelSystem/fetchGuild";
-import { fetchUser } from "../Functions/LevelSystem/fetchUser";
-import { guildLeaderboard } from "../Functions/LevelSystem/guildLeaderboard";
-import { setLvl } from "../Functions/LevelSystem/setLvL";
-import { setXp } from "../Functions/LevelSystem/setXp";
-import { subsLvL } from "../Functions/LevelSystem/subsLvL";
-import { subsXp } from "../Functions/LevelSystem/subsXp";
-import { xpFor } from "../Functions/LevelSystem/xpFor";
-import { MongoURI } from "../Types";
+import { addXp } from '../Functions/LevelSystem/addXp';
+import { addLvL } from '../Functions/LevelSystem/addLvL';
+import { connect } from 'mongoose';
+import { DsMiError } from '../Utils/DsMiError';
+import { createUser } from '../Functions/LevelSystem/createUser';
+import { delGuild } from '../Functions/LevelSystem/delGuild';
+import { delUser } from '../Functions/LevelSystem/delUser';
+import { existsUser } from '../Functions/LevelSystem/existsUser';
+import { fetchAll } from '../Functions/LevelSystem/fetchAll';
+import { fetchGuild } from '../Functions/LevelSystem/fetchGuild';
+import { fetchUser } from '../Functions/LevelSystem/fetchUser';
+import { guildLeaderboard } from '../Functions/LevelSystem/guildLeaderboard';
+import { setLvl } from '../Functions/LevelSystem/setLvL';
+import { setXp } from '../Functions/LevelSystem/setXp';
+import { subsLvL } from '../Functions/LevelSystem/subsLvL';
+import { subsXp } from '../Functions/LevelSystem/subsXp';
+import { xpFor } from '../Functions/LevelSystem/xpFor';
+import { MongoURI } from '../Types';
 
 /**
  * Setup LevelSystem class.
@@ -27,11 +27,9 @@ export default class LevelSystem {
    * @param mongoURL Mongoose URI to connect.
    */
   constructor(mongoURL: MongoURI) {
-    connect(mongoURL)
-      .then(() => {})
-      .catch((e: Error) => {
-        throw new DsMiError(`Error on connect to Mongoose: \n${e}`);
-      });
+    connect(mongoURL).catch((e: Error) => {
+      throw new DsMiError(`Error on connect to Mongoose: \n${e}`);
+    });
   }
   /**
    * Add levels to a specific user.
