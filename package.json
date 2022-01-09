@@ -49,6 +49,7 @@
   },
   "homepage": "https://github.com/YeralAndre/discord-miscellaneous#readme",
   "files": [
-    "lib/**/*"
+    "lib/**/*",
+    "fonts/**/*"
   ]
 }

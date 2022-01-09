@@ -2,7 +2,7 @@ import { AvatarURL, BackgroundURL, ColorResolvable } from '../Types';
 import Canvas, { registerFont } from 'canvas';
 import path from 'path';
 import { DsMiError } from '../Utils/DsMiError';
-registerFont(path.join(__dirname, '..', '/Fonts/Whitney_Bold.ttf'), {
+registerFont(path.join(__dirname, '..', '..', '/fonts/Whitney_Bold.ttf'), {
   family: 'Arial',
 });
 

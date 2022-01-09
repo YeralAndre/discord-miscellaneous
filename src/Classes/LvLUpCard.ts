@@ -3,7 +3,7 @@ import Canvas, { registerFont } from 'canvas';
 import { fillTextWithTwemoji } from 'node-canvas-with-twemoji-and-discord-emoji';
 import path from 'path';
 import { DsMiError } from '../Utils/DsMiError';
-registerFont(path.join(__dirname, '..', '/Fonts/Whitney_Bold.ttf'), {
+registerFont(path.join(__dirname, '..', '..', '/fonts/Whitney_Bold.ttf'), {
   family: 'Arial',
 });
 
