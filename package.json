@@ -1,12 +1,12 @@
 {
   "name": "discord-miscellaneous",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Multiple useful functions for your Discord bot.",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
   "scripts": {
     "build": "tsc",
-    "format": "prettier --write \"src/**/*.ts\" \"src/**/*.js\"",
+    "format": "prettier --write \"src/**/*.ts\"",
     "lint": "tslint -p tsconfig.json",
     "prepare": "npm run build",
     "prepublishOnly": "npm run lint",
