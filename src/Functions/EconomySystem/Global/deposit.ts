@@ -8,19 +8,19 @@ export async function deposit(userID: string, amount: number | 'all') {
   });
   if (!hasUser) throw new DsMiError('This user not exists!');
   if ((amount as number) > hasUser.balMoney) {
-    const deposit = (amount as number) - hasUser.balMoney;
+    const depositNumber = (amount as number) - hasUser.balMoney;
     await EconomySystemSchema.updateOne(
       {
         userID: userID,
       },
       {
         $inc: {
-          bankMoney: deposit,
-          balMoney: -deposit,
+          bankMoney: depositNumber,
+          balMoney: -depositNumber,
         },
       },
     );
-    return deposit as number;
+    return depositNumber as number;
   }
   if ((amount as number) + hasUser.bankCapacity > hasUser.bankCapacity || amount === 'all') {
     const add = hasUser.bankCapacity - hasUser.bankMoney;
