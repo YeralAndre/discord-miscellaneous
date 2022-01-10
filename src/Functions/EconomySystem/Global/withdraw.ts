@@ -13,7 +13,7 @@ export async function withdraw(userID: string, amount: number | 'all') {
     throw new DsMiError('The amount to deposit is greater than the one you have');
   if (amount === 'all') {
     const all = hasUser.bankMoney;
-    const updatedUser = await EconomySystemSchema.findOneAndUpdate(
+    await EconomySystemSchema.updateOne(
       {
         userID: userID,
       },
@@ -24,11 +24,9 @@ export async function withdraw(userID: string, amount: number | 'all') {
         },
       },
     );
-    delete updatedUser['_id'];
-    delete updatedUser['__v'];
-    return updatedUser as FetchedUser;
+    return all as number;
   } else {
-    const updatedUser = await EconomySystemSchema.findOneAndUpdate(
+    await EconomySystemSchema.updateOne(
       {
         userID: userID,
       },
@@ -39,8 +37,6 @@ export async function withdraw(userID: string, amount: number | 'all') {
         },
       },
     );
-    delete updatedUser['_id'];
-    delete updatedUser['__v'];
-    return updatedUser as FetchedUser;
+    return amount as number;
   }
 }

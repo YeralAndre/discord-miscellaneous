@@ -7,11 +7,25 @@ export async function deposit(userID: string, amount: number | 'all') {
     userID: userID,
   });
   if (!hasUser) throw new DsMiError('This user not exists!');
-  if (amount > hasUser.balMoney) throw new DsMiError("You don't have enough money to deposit!");
+  if ((amount as number) > hasUser.balMoney) {
+    const deposit = (amount as number) - hasUser.balMoney;
+    await EconomySystemSchema.updateOne(
+      {
+        userID: userID,
+      },
+      {
+        $inc: {
+          bankMoney: deposit,
+          balMoney: -deposit,
+        },
+      },
+    );
+    return deposit as number;
+  }
   if ((amount as number) + hasUser.bankCapacity > hasUser.bankCapacity || amount === 'all') {
     const add = hasUser.bankCapacity - hasUser.bankMoney;
     if (add > hasUser.balMoney) {
-      const updatedUser = await EconomySystemSchema.findOneAndUpdate(
+      await EconomySystemSchema.updateOne(
         {
           userID: userID,
         },
@@ -22,11 +36,9 @@ export async function deposit(userID: string, amount: number | 'all') {
           },
         },
       );
-      delete updatedUser['_id'];
-      delete updatedUser['__v'];
-      return updatedUser as FetchedUser;
+      return add;
     } else {
-      const updatedUser = await EconomySystemSchema.findOneAndUpdate(
+      await EconomySystemSchema.updateOne(
         {
           userID: userID,
         },
@@ -37,9 +49,7 @@ export async function deposit(userID: string, amount: number | 'all') {
           },
         },
       );
-      delete updatedUser['_id'];
-      delete updatedUser['__v'];
-      return updatedUser as FetchedUser;
+      return add;
     }
   }
 }

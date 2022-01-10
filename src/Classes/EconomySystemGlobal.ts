@@ -62,6 +62,7 @@ export default class EconomySystemGlobal {
    * Deposit money a specify user.
    * @param userID ID of user.
    * @param amount Money to deposit.
+   * @returns The money that was deposited.
    * @example client.economy.deposit(message.author.id, 100);
    */
   public deposit = deposit;
@@ -87,6 +88,7 @@ export default class EconomySystemGlobal {
    * Remove money from the bank to a user.
    * @param userID ID of user.
    * @param money Money to withdraw.
+   * @returns The money that was withdrawn.
    * @example client.economy.withdraw(message.author.id, 100);
    */
   public withdraw = withdraw;
